@@ -15,7 +15,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -41,8 +40,23 @@ class RandomUserBOTest {
     @BeforeEach
     void setUp() throws IOException {
         MockitoAnnotations.initMocks(this);
+        setUpUser1();
+        setUpUser2();
         when(randomUserService.getAllUsers(SEED, RESULTS)).thenReturn(Lists.newArrayList(user1, user2));
+    }
 
+    void setUpUser1() {
+        when(user1.getName()).thenReturn(name1);
+        when(name1.getLast()).thenReturn("Gonzales");
+        when(user1.getLogin()).thenReturn(login1);
+        when(user1.getLogin().getUsername()).thenReturn(OTHERUSERNAME);
+    }
+
+    void setUpUser2() {
+        when(user2.getName()).thenReturn(name2);
+        when(name2.getLast()).thenReturn("Roberts");
+        when(user2.getLogin()).thenReturn(login2);
+        when(user2.getLogin().getUsername()).thenReturn(LASVEGAS2020);
     }
 
     @Test
@@ -54,23 +68,13 @@ class RandomUserBOTest {
 
     @Test
     void getUsersByFirstLetterOfLastNameTest() throws IOException {
-        when(user1.getName()).thenReturn(name1);
-        when(name1.getLast()).thenReturn("Gonzales");
-        when(user2.getName()).thenReturn(name2);
-        when(name2.getLast()).thenReturn("Roberts");
-        List<String> expected = Lists.newArrayList("Gonzales");
-        List<User> filteredUsers = randomUserBO.getUsersByFirstLetterOfLastName("G", SEED, RESULTS);
-        List<String> actual = filteredUsers.stream()
-                .map((user1 -> user1.getName().getLast())).collect(Collectors.toList()); // did this so that I wouldn't need to build a large user object.
+        List<User> expected = Lists.newArrayList(user1);
+        List<User> actual = randomUserBO.getUsersByFirstLetterOfLastName("G", SEED, RESULTS);
         assertEquals(expected, actual);
     }
 
     @Test
     void getUserByUsernameTest() throws IOException {
-        when(user1.getLogin()).thenReturn(login1);
-        when(user1.getLogin().getUsername()).thenReturn(OTHERUSERNAME);
-        when(user2.getLogin()).thenReturn(login2);
-        when(user2.getLogin().getUsername()).thenReturn(LASVEGAS2020);
         List<User> expected = Lists.newArrayList(user2);
         List<User> actual = randomUserBO.getUserByUsername(LASVEGAS2020, SEED, RESULTS);
         assertEquals(expected, actual);
