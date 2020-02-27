@@ -2,12 +2,13 @@ package com.wolfe.stations.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Cacheable("user")
 public class User {
-//    @JsonProperty
     private String gender;
     private Name name;
     private Location location;

@@ -1,6 +1,7 @@
 package com.wolfe.stations.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.Objects;
@@ -10,10 +11,12 @@ public class Users {
     private List<User> users;
     private User user;
 
+    @Cacheable("users")
     public List<User> getUsers() {
         return users;
     }
 
+    @Cacheable("user")
     public User getUser() {
         return user;
     }
