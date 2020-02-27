@@ -15,6 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -75,8 +76,15 @@ class RandomUserBOTest {
 
     @Test
     void getUserByUsernameTest() throws IOException {
-        List<User> expected = Lists.newArrayList(user2);
-        List<User> actual = randomUserBO.getUserByUsername(LASVEGAS2020, SEED, RESULTS);
+        Optional<User> expected = Optional.of(Lists.newArrayList(user2).get(0));;
+        Optional<User> actual = randomUserBO.getUserByUsername(LASVEGAS2020, SEED, RESULTS);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getUserByUsernameIfNoUserNameExistsTest() throws IOException {
+        Optional<User> expected = Optional.empty();;
+        Optional<User> actual = randomUserBO.getUserByUsername("NO_USER_NAME_EXISTS", SEED, RESULTS);
         assertEquals(expected, actual);
     }
 }
