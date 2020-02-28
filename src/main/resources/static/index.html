@@ -5,6 +5,31 @@
     <title>Stations App</title>
 </head>
 <body>
-  <h1>Stations App - Gerry Wolfe</h1>
+  <h1>Stations App Demo - Gerry Wolfe</h1>
+
+  <form action="randomusers">
+      <fieldset>
+        <input type="text" name="seed" placeholder="Enter seed"/>
+        <input type="text" name="results" placeholder="Enter results"/>
+      </fieldset>
+    <input type="submit" value="AllUsers"/>
+  </form>
+
+  <form action="randomusers/firstletter">
+    <fieldset>
+      <input type="text" name="letter" placeholder="enter first letter" />
+      <input type="text" name="seed" placeholder="enter seed"/>
+      <input type="text" name="results" placeholder="enter results" />
+    </fieldset>
+    <input type="submit" value="First Letter Last Name Users"/>
+  </form>
+
+  <form action="randomusers/byusername">
+    <fieldset>
+      <input type="text" name="username" placeholder="enter username"/>
+      <input type="text" name="seed" placeholder="enter seed"/>
+    </fieldset>
+    <input type="submit" value="by username"/>
+  </form>
 </body>
 </html>

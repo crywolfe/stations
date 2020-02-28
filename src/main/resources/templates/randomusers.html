@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Random Users - DEMO</title>
+</head>
+<body>
+  <h1>Random Users - DEMO</h1>
+
+  <form action="randomusers.html" th:attr="action=@{/randomusers}">
+    <fieldset>
+      <input type="text" name="seed" placeholder="seed"/>
+      <input type="text" name="results" placehodler="results" />
+      <input type="submit" value="Submit"/>
+    </fieldset>
+  </form>
+
+  <h2>All Users</h2>
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>User Name</td>
+    </tr>
+    <tr th:each="randomUser: ${randomUsers}">
+      <td th:text="${randomUser.getName().getFirst()} + ' ' + ${randomUser.getName().getLast()}">NAME</td>
+      <td th:text="${randomUser.getLogin().getUsername()}">USER NAME</td>
+    </tr>
+  </table>
+
+  <form action="index.html" th:attr="action=@{/}">
+    <button type="submit">Return To Index</button>
+  </form>
+</body>
+</html>
