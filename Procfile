@@ -1,1 +1,1 @@
-worker: java -jar target/stations-0.0.1-SNAPSHOT.jar
+web: java -jar -Dserver.port=$PORT target/stations-0.0.1-SNAPSHOT.jar
