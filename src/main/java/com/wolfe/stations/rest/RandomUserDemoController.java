@@ -1,5 +1,6 @@
 package com.wolfe.stations.rest;
 
+import com.google.common.base.Strings;
 import com.wolfe.stations.models.User;
 import com.wolfe.stations.service.RandomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,12 @@ public class RandomUserDemoController {
     @GetMapping(value="/randomusers")
     public String getAllRandomUsers(@RequestParam(value="seed", required=false)String seed,
                                     @RequestParam(value="results", required=false)String results, Model model) throws IOException {
-
+        if (Strings.isNullOrEmpty(seed)) {
+            seed = "foobar";
+        }
+        if (Strings.isNullOrEmpty(results)) {
+            results = "100";
+        }
         List<User> randomUsers = this.randomUserService.getAllUsers(seed, results);
         model.addAttribute("randomUsers", randomUsers);
         return "randomusers";
@@ -32,9 +38,18 @@ public class RandomUserDemoController {
     public String getUsersByFirstLetterLastName(@RequestParam(value="letter")String letter,
                                                 @RequestParam(value="seed", required=false)String seed,
                                                 @RequestParam(value="results", required=false)String results, Model model) throws IOException {
-
+        if (Strings.isNullOrEmpty(seed)) {
+            seed = "foobar";
+        }
+        if (Strings.isNullOrEmpty(results)) {
+            results = "100";
+        }
         List<User> filteredRandomUsers = this.randomUserService.getUsersByFirstLetterLastName(letter, seed, results);
-        model.addAttribute("filteredRandomUsers", filteredRandomUsers);
+        if (filteredRandomUsers.size() == 0) {
+            model.addAttribute("filteredRandomUsers", "");
+        } else {
+            model.addAttribute("filteredRandomUsers", filteredRandomUsers);
+        }
         return "filteredrandomusers";
     }
 
@@ -42,7 +57,12 @@ public class RandomUserDemoController {
     public String getUserByUsername(@RequestParam(value="username")String username,
                                     @RequestParam(value="seed", required=false)String seed,
                                     @RequestParam(value="results", required=false)String results, Model model) throws IOException {
-
+        if (Strings.isNullOrEmpty(seed)) {
+            seed = "foobar";
+        }
+        if (Strings.isNullOrEmpty(results)) {
+            results = "100";
+        }
         Optional<User> user = this.randomUserService.getUserByUsername(username, seed, results);
         model.addAttribute("user", user);
         return "userbyusername";

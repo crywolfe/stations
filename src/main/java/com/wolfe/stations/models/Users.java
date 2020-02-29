@@ -11,12 +11,10 @@ public class Users {
     private List<User> users;
     private User user;
 
-    @Cacheable("users")
     public List<User> getUsers() {
         return users;
     }
 
-    @Cacheable("user")
     public User getUser() {
         return user;
     }

@@ -7,7 +7,6 @@ import org.springframework.cache.annotation.Cacheable;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Cacheable("user")
 public class User {
     private String gender;
     private Name name;
