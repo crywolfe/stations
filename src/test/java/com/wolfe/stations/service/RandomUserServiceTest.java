@@ -1,5 +1,7 @@
 package com.wolfe.stations.service;
 
+import com.wolfe.stations.business.RandomUserBO;
+import com.wolfe.stations.models.Name;
 import com.wolfe.stations.models.User;
 import com.wolfe.stations.parser.JsonParser;
 import org.assertj.core.util.Lists;
@@ -24,6 +26,7 @@ class RandomUserServiceTest {
 
     @Mock private User user;
     @Mock private RandomUserFetcher randomUserFetcher;
+    @Mock private RandomUserBO randomUserBO;
 
     private static final String SEED = "foobar";
     private static final String RESULTS = "1";
@@ -55,6 +58,7 @@ class RandomUserServiceTest {
     void getUserTest() throws IOException {
 
         when(randomUserFetcher.fetchUser(SEED, RESULTS)).thenReturn(user);
+        when(randomUserBO.getUserByUsername(USERNAME, SEED, RESULTS)).thenReturn(Optional.of(user));
         User expected = user;
         Optional<User> optionalActual = randomUserService.getUserByUsername(USERNAME, SEED, RESULTS);
         User actual = new User();
