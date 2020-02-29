@@ -19,11 +19,6 @@ public class RandomUserDemoController {
 
     @Autowired private RandomUserService randomUserService;
 
-    @GetMapping(value="/")
-    public String getApp() throws IOException {
-        return "";
-    }
-
     @GetMapping(value="/randomusers")
     public String getAllRandomUsers(@RequestParam(value="seed", required=false)String seed,
                                     @RequestParam(value="results", required=false)String results, Model model) throws IOException {
