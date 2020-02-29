@@ -17,7 +17,7 @@ public class RandomUserFetcher {
     private static final String RESULTS_PARAM = "results=";
     private static final String SEED_PARAM = "&seed=";
 
-    public URL buildUrl(String seed, String results) throws MalformedURLException {
+    URL buildUrl(String seed, String results) throws MalformedURLException {
         StringBuilder urlString = new StringBuilder();
         urlString.append(BASE_URL);
         urlString.append(RESULTS_PARAM).append(results);
@@ -26,7 +26,7 @@ public class RandomUserFetcher {
         return new URL(urlString.toString());
     }
 
-    public List<User> fetchUsers(String seed, String results) throws IOException {
+    List<User> fetchUsers(String seed, String results) throws IOException {
         URL url = buildUrl(seed, results);
 
         URLConnection connection = url.openConnection();
@@ -39,7 +39,7 @@ public class RandomUserFetcher {
         return result;
     }
 
-    public User fetchUser(String seed, String results) throws IOException {
+    User fetchUser(String seed, String results) throws IOException {
         URL url = buildUrl(seed, results);
 
         URLConnection connection = url.openConnection();
